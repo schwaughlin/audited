@@ -40,6 +40,10 @@ module Audited
           yield :add_request_uuid_to_audits
         end
 
+        unless columns.include?( 'effective_date' )
+           yield :add_effective_date_to_audits
+        end
+
         unless columns.include?( 'association_id' )
           if columns.include?('auditable_parent_id')
             yield :rename_parent_to_association

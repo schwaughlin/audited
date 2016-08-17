@@ -197,19 +197,19 @@ module Audited
       end
 
       def audit_create
-        write_audit(action: 'create', audited_changes: audited_attributes,
+        write_audit(:action => 'create', :audited_changes => audited_attributes, :effective_date => Time.now,
                     comment: audit_comment)
       end
 
       def audit_update
         unless (changes = audited_changes).empty? && audit_comment.blank?
-          write_audit(action: 'update', audited_changes: changes,
+          write_audit(:action => 'update', :audited_changes => changes, :effective_date => Time.now,
                       comment: audit_comment)
         end
       end
 
       def audit_destroy
-        write_audit(action: 'destroy', audited_changes: audited_attributes,
+        write_audit(:action => 'destroy', :audited_changes => audited_attributes, :effective_date => Time.now,
                     comment: audit_comment) unless self.new_record?
       end
 
